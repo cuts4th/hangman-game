@@ -6,20 +6,17 @@ const Hangman = function (word, remainingGuesses) {
 }
 
 Hangman.prototype.calculateStatus = function() {
-  const finished = this.word.every(letter => this.guessed.includes(letter))
-
-  // let count = 0;
-  // this.word.forEach(letter => {
-  //   if (this.guessed.includes(letter) && this.remainingGuesses > 0) {
-  //     count++
-  //   }
-  // });
+  let count = 0;
+  this.word.forEach(letter => {
+    if (this.guessed.includes(letter) && this.remainingGuesses > 0) {
+      count++
+    }
+  });
   DOMstrings.message.textContent = `Guesses left ${this.remainingGuesses}.`;
   if(this.remainingGuesses === 0){
     this.status = 'failed';
     DOMstrings.message.textContent = `Nice try, the word is "${this.word.join('')}".`;
-  // } else if (count === this.word.length){
-  }else if(finished){
+  } else if (count === this.word.length){
     this.status = 'finished';
     DOMstrings.message.textContent = `Great work! you guessed the word`;
   }
